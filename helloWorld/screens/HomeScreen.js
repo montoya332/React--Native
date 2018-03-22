@@ -28,15 +28,26 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-        <Resume />
-        </ScrollView>
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
+          <View>
+            <HeroTitle />
+            <Timeline
+              title="Background"
+              headerIcon="fa-clock-o"
+              items={jobItems}
+              pageLine
+            />
+            <Timeline
+              title="Education"
+              headerIcon="fa-rocket"
+              items={educationItems}
+            />
+            <Timeline
+              title="Projects"
+              headerIcon="fa-rocket"
+              items={projectItems}
+            />
           </View>
-        </View>
+        </ScrollView>
       </View>
     );
   }
@@ -75,28 +86,6 @@ export default class HomeScreen extends React.Component {
   };
 }
 
-const Resume = props => (
-  <View>
-    <HeroTitle />
-    <Timeline
-      title="Background"
-      headerIcon="fa-clock-o"
-      items={jobItems}
-      pageLine
-    />
-    <Timeline
-      title="Education"
-      headerIcon="fa-rocket"
-      items={educationItems}
-    />
-    <Timeline
-      title="Projects"
-      headerIcon="fa-rocket"
-      items={projectItems}
-    />
-  </View>
-);
-
 const HeroTitle = props => (
   <Text>HeroTitle</Text>
 );
@@ -126,11 +115,9 @@ const TimelineItemHeader = props => (
 );
 
 const SectionHeader = props => (
-  return (
     <View>
-      <Text>{item.title}</Text>
+      <Text>{props.title}</Text>
     </View>
-  );
 );
 
 const TimelineHeader = props => (
