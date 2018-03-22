@@ -9,7 +9,14 @@ import {
   View,
 } from 'react-native';
 import { WebBrowser } from 'expo';
-
+import {
+  Location,
+  jobItems,
+  educationItems,
+  projectItems,
+  languageIconItems,
+  skillsIconItems
+} from '../assets/stubData/resume';
 import { MonoText } from '../components/StyledText';
 
 export default class HomeScreen extends React.Component {
@@ -21,38 +28,8 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            />
-          </View>
-
-          <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
-
-            <Text style={styles.getStartedText}>Get started by opening</Text>
-
-            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-              <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
-            </View>
-
-            <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
-            </Text>
-          </View>
-
-          <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-            </TouchableOpacity>
-          </View>
+        <Resume />
         </ScrollView>
-
         <View style={styles.tabBarInfoContainer}>
           <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
 
@@ -97,6 +74,72 @@ export default class HomeScreen extends React.Component {
     );
   };
 }
+
+const Resume = props => (
+  <View>
+    <HeroTitle />
+    <Timeline
+      title="Background"
+      headerIcon="fa-clock-o"
+      items={jobItems}
+      pageLine
+    />
+    <Timeline
+      title="Education"
+      headerIcon="fa-rocket"
+      items={educationItems}
+    />
+    <Timeline
+      title="Projects"
+      headerIcon="fa-rocket"
+      items={projectItems}
+    />
+  </View>
+);
+
+const HeroTitle = props => (
+  <Text>HeroTitle</Text>
+);
+
+const Timeline = props => (
+  <View>
+    <SectionHeader
+      title={props.title}
+    />
+    { props.items.map((item, key) => <TimelineItem key={key} item={item} pageLine={props.pageLine} />) }
+  </View>
+);
+
+const TimelineItem = (props) => {
+  const { item, pageLine } = props;
+  return (
+    <View>
+      <Text>{`${item.startDate} - ${item.endDate}`}</Text>
+      <Text>{item.location}</Text>
+      <Text>{props.details}</Text>
+    </View>
+  );
+};
+
+const TimelineItemHeader = props => (
+ <Text>TimelineItemHeader</Text>
+);
+
+const SectionHeader = props => (
+  return (
+    <View>
+      <Text>{item.title}</Text>
+    </View>
+  );
+);
+
+const TimelineHeader = props => (
+ <Text>TimelineHeader</Text>
+);
+
+const TimelineMilestoneIcon = (props) => {
+ return (<Text>TimelineMilestoneIcon</Text>)
+};
 
 const styles = StyleSheet.create({
   container: {
